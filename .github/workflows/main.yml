@@ -66,6 +66,14 @@ jobs:
           username: yandex
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
+      - name: Login to Docker
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: pull
+        uses: appleboy/ssh-action@master
+        with:
           script: |
             sudo docker pull whoishacked/infra
             #остановка всех контейнеров
